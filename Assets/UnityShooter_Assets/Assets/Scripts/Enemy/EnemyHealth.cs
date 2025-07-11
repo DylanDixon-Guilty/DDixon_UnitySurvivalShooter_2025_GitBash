@@ -6,16 +6,16 @@ public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth = 100;
     public int currentHealth;
-    public float sinkSpeed = 2.5f;
     public int scoreValue = 10;
     public AudioClip deathClip; // Enemy death sound
-
-    Animator anim;
-    AudioSource enemyAudio;
-    ParticleSystem hitParticles;
-    CapsuleCollider capsuleCollider;
     public bool isDead;
     public bool isSinking;
+    public float sinkSpeed = 2.5f;
+
+    private Animator anim;
+    private AudioSource enemyAudio;
+    private ParticleSystem hitParticles;
+    private CapsuleCollider capsuleCollider;
 
     private void Awake()
     {
