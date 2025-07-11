@@ -21,7 +21,7 @@ public class ItemSlot : MonoBehaviour
         ItemSelected();
     }
 
-    //When player presses One or Two, the number on the Item lost will appear Green. Indicating which weapon the player is using
+    //When player presses One or Two, the number on the Item list will appear Green. Indicating which weapon the player is using
     public void ItemSelected()
     {
         if(Input.GetButtonDown("ItemOne"))
