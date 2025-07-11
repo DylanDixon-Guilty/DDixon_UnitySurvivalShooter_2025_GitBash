@@ -1,0 +1,33 @@
+using UnityEngine;
+using UnityEngine.AI;
+
+public class EnemyMovement : MonoBehaviour
+{
+    
+    Transform player;
+    PlayerHealth playerHealth;
+    EnemyHealth enemyHealth;
+    NavMeshAgent nav;
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerHealth = player.GetComponent<PlayerHealth>();
+        enemyHealth = GetComponent<EnemyHealth>();
+        nav = GetComponent<NavMeshAgent>();
+    }
+
+    // The enemy will walk towards the player as long as the player (or the enemy) is not dead.
+    private void Update()
+    {
+        
+        if(enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
+        {
+            nav.SetDestination(player.position);
+        }
+        else
+        {
+            nav.enabled = false;
+        }
+    }
+}
