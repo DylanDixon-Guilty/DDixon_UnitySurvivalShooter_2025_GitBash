@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
     public Transform target;
     public float smoothing = 5f;
-    Vector3 offset;
+
+    private Vector3 offset;
 
     private void Start()
     {

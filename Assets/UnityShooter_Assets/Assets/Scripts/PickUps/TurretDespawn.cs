@@ -4,7 +4,9 @@ using UnityEngine;
 public class TurretDespawn : MonoBehaviour
 {
 
-    //To Despawn turret after 10 seconds//
+    /// <summary>
+    /// To Despawn turret after 10 seconds
+    /// </summary>
     private IEnumerator DespawnTurret()
     {
         yield return new WaitForSeconds(10);
@@ -12,8 +14,8 @@ public class TurretDespawn : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Awake()
+    
+    private void Awake()
     {
         //Despawing Turret
         StartCoroutine(DespawnTurret());
