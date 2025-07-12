@@ -4,9 +4,9 @@ using UnityEngine;
 public class MedKit : MonoBehaviour
 {
     public int Heal = 10; //Heals player for 10 Hit points
-
-    GameObject player;
     public GameObject medKit;
+
+    private GameObject player;
     private PlayerHealth playerHealth;
 
 
@@ -21,17 +21,21 @@ public class MedKit : MonoBehaviour
         StartCoroutine(DespawnTimer());
     }
 
-    // When the Medkit stays on ground for alotted amount of time (in Start function).
+    /// <summary>
+    /// When the Medkit stays on ground for alotted amount of time (in Start function).
+    /// </summary>
     private IEnumerator DespawnTimer()
     {
         yield return new WaitForSeconds(4);
         Destroy(gameObject);
     }
 
-    //When player walks over Medkit
+    /// <summary>
+    /// When player walks over Medkit and there health is less than 100, Pick up Medkit
+    /// </summary>
     private void OnCollisionEnter(Collision other)
     {
-        // If player's Health is lower than 100, pickUP
+        
         if (other.gameObject == player && playerHealth.currentHealth != 100)
         {
             playerHealth.HealthRestored(Heal);

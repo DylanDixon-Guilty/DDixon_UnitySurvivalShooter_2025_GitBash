@@ -3,14 +3,12 @@ using UnityEngine;
 public class Traps : MonoBehaviour
 {
     public GameObject player;
-
     public PlayerHealth playerHealth;
-    Animator anim;
-
     public int trapDamage = 15;
-    public float timer;
 
-    void Awake()
+    private Animator anim;
+
+    private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
@@ -21,8 +19,8 @@ public class Traps : MonoBehaviour
         Invoke(nameof(TrapDespawning), 8f);
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
 
         if (playerHealth.currentHealth <= 0 && playerHealth.currentHealth > 0)
@@ -31,7 +29,9 @@ public class Traps : MonoBehaviour
         }
     }
 
-    //Hurt the player when they enter the trap once.
+    /// <summary>
+    /// Hurts the player when they enter the trap once.
+    /// </summary>
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject == player)
@@ -40,18 +40,21 @@ public class Traps : MonoBehaviour
         }
     }
 
-    
-    void DamagePlayer()
+    /// <summary>
+    /// The amount of Damage the player takes when stepping in Trap
+    /// </summary>
+    private void DamagePlayer()
     {
-        timer = 0f;
         if (playerHealth.currentHealth > 0)
         {
             playerHealth.TakeDamage(trapDamage);
         }
     }
 
-    //After 8 seconds the trap will despawn, (in Start function).
-    void TrapDespawning()
+    /// <summary>
+    /// After 8 seconds the trap will despawn, (in Start function).
+    /// </summary>
+    private void TrapDespawning()
     {
         Destroy(gameObject);
     }
