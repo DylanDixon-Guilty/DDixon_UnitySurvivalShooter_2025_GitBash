@@ -5,12 +5,11 @@ using UnityEngine;
 public class EnemyLootDrop : MonoBehaviour
 {
     private EnemyHealth enemyHealth;
+    private bool stopLooting = true;
 
-    int dropChance;
-    
-    bool stopLooting = true;
     public GameObject medKit;
     public Transform enemyDeathPoint;
+    public int dropChance; // 50 in Enemy Prefabs
 
     private void Awake()
     {
@@ -18,8 +17,7 @@ public class EnemyLootDrop : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if(enemyHealth.currentHealth <= 0 && stopLooting == true)
         {
@@ -29,11 +27,12 @@ public class EnemyLootDrop : MonoBehaviour
 
     }
 
-    //Upon defeating an enemy a Medkit will have a 50% of dropping
+    /// <summary>
+    /// Upon defeating an enemy a Medkit will have a 50% of dropping
+    /// </summary>
     void HealthKitLootOnDeath()
     {
         // Determine if a medkit will be dropped
-        dropChance = 50;
         float drop = Random.Range(0f, 100f);
         if (dropChance > drop)
         {

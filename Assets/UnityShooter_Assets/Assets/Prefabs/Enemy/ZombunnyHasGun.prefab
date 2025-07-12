@@ -324,11 +324,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 80
   currentHealth: 0
-  sinkSpeed: 2.5
   scoreValue: 45
-  deathClip: {fileID: 8300000, guid: 1d3bfb9269f136947bf8ac164cace1ff, type: 3}
+  sinkSpeed: 2.5
   isDead: 0
   isSinking: 0
+  deathClip: {fileID: 8300000, guid: 1d3bfb9269f136947bf8ac164cace1ff, type: 3}
 --- !u!114 &8695199968617127269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,6 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35014b2707d063e45a50915caac305a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropChance: 50
   medKit: {fileID: 1165109527942937982, guid: c7e75b29e16436644a3d5728c47df825, type: 3}
   enemyDeathPoint: {fileID: 1459029006898474302}
 --- !u!4 &1459029006898474302 stripped

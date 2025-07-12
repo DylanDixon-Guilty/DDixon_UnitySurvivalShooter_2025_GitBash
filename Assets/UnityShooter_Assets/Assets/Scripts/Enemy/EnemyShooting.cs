@@ -6,17 +6,17 @@ public class EnemyShooting : MonoBehaviour
     public float timeBetweenBullets = 5f;
     public float range = 100f;
 
-    float timer;
-    Ray shootRay;
-    RaycastHit shootHit;
-    int shootableMask;
-    ParticleSystem gunParticles;
-    LineRenderer gunLine;
-    AudioSource gunAudio;
-    Light gunLight;
-    float effectDisplayTime = 0.1f;
+    private float timer;
+    private Ray shootRay;
+    private RaycastHit shootHit;
+    private int shootableMask;
+    private ParticleSystem gunParticles;
+    private LineRenderer gunLine;
+    private AudioSource gunAudio;
+    private Light gunLight;
+    private float effectDisplayTime = 0.1f;
     
-    void Awake()
+    private void Awake()
     {
         shootableMask = LayerMask.GetMask("ShootablePlayer");
         gunParticles = GetComponent<ParticleSystem>();
@@ -25,8 +25,7 @@ public class EnemyShooting : MonoBehaviour
         gunLight = GetComponent<Light>();
     }
 
-    
-    void Update()
+    private void Update()
     {
         timer += Time.deltaTime;
 
@@ -40,8 +39,10 @@ public class EnemyShooting : MonoBehaviour
         }
     }
 
-    //==Every 5 seconds the enemy will attempt to shoot at the player==//
-    void Shoot()
+    /// <summary>
+    /// Every 5 seconds the enemy will attempt to shoot at the player
+    /// </summary>
+    private void Shoot()
     {
         timer = 0f;
         gunAudio.Play(); // plays shoot
@@ -69,6 +70,9 @@ public class EnemyShooting : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function to disable the light and Gunline after Zombunny fires
+    /// </summary>
     public void DisableEffects()
     {
         gunLine.enabled = false;
