@@ -7,10 +7,10 @@ public class EnemyHealth : MonoBehaviour
     public int startingHealth = 100;
     public int currentHealth;
     public int scoreValue = 10;
-    public AudioClip deathClip; // Enemy death sound
+    public float sinkSpeed = 2.5f;
     public bool isDead;
     public bool isSinking;
-    public float sinkSpeed = 2.5f;
+    public AudioClip deathClip; // Enemy death sound
 
     private Animator anim;
     private AudioSource enemyAudio;
@@ -27,8 +27,8 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = startingHealth;
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         if (isSinking)
         {
@@ -36,7 +36,9 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    //When enemy is hurt, take health away
+    /// <summary>
+    /// When enemy is hurt, take health away
+    /// </summary>
     public void TakeDamage(int amount, Vector3 hitPoint)
     {
         if (isDead) return;
@@ -52,7 +54,10 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    void Death()
+    /// <summary>
+    /// Function for when current health of enemy reaches Zero
+    /// </summary>
+    private void Death()
     {
         isDead = true;
         capsuleCollider.isTrigger = true;
@@ -61,6 +66,9 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio.Play(); // plays Death
     }
 
+    /// <summary>
+    /// Function to make enemy sink beneath floor and despawn
+    /// </summary>
     public void StartSinking()
     {
         GetComponent<NavMeshAgent>().enabled = false;

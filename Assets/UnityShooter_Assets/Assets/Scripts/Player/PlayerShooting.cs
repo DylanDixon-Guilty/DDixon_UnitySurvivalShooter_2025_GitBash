@@ -7,21 +7,21 @@ public class PlayerShooting : MonoBehaviour
     public float timeBetweenBullets = 0.15f;
     public float range = 100f;
 
-    float timer;
-    Ray shootRay;
-    RaycastHit shootHit;
-    int shootableMask;
-    ParticleSystem gunParticles;
-    LineRenderer gunLine;
-    AudioSource gunAudio;
-    Light gunLight;
-    float effectDisplayTime = 0.2f;
+    private float timer;
+    private int shootableMask;
+    private float effectDisplayTime = 0.2f;
+    private Ray shootRay;
+    private RaycastHit shootHit;
+    private ParticleSystem gunParticles;
+    private LineRenderer gunLine;
+    private AudioSource gunAudio;
+    private Light gunLight;
     
     //For swapping between guns
     public GameObject gun;
     public GameObject shotGun;
 
-    void Awake()
+    private void Awake()
     {
         shootableMask = LayerMask.GetMask("Shootable");
         gunParticles = GetComponent<ParticleSystem>();
@@ -31,8 +31,7 @@ public class PlayerShooting : MonoBehaviour
     }
 
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         timer += Time.deltaTime;
                                                                         /*When menu is paused*/
@@ -49,10 +48,12 @@ public class PlayerShooting : MonoBehaviour
         ChoosingGun();
     }
 
-    // Pressing One and Two swaps between guns
-    void ChoosingGun()
+    /// <summary>
+    /// Pressing One or Two swaps between guns
+    /// </summary>
+    private void ChoosingGun()
     {
-        if(Input.GetButtonDown("ItemOne"))
+        if (Input.GetButtonDown("ItemOne"))
         {
             gun.SetActive(true);
             shotGun.SetActive(false);
@@ -65,8 +66,10 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-    //Pressing Left-Click fires the gun
-    void Shoot()
+    /// <summary>
+    /// Pressing Left-Click on mouse fires the gun
+    /// </summary>
+    private void Shoot()
     {
         timer = 0f;
         gunAudio.Play(); // plays shoot
@@ -94,7 +97,9 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// To remove the light effect and line that appears after shooting
+    /// </summary>
     public void DisableEffects()
     {
         gunLine.enabled = false;
