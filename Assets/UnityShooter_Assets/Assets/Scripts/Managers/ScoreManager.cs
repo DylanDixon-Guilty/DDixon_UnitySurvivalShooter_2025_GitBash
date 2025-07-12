@@ -4,6 +4,7 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     public static int score;
+
     private TextMeshProUGUI text;
 
     private void Awake()
@@ -12,8 +13,10 @@ public class ScoreManager : MonoBehaviour
         score = 0;
     }
 
-    // keeping check of the current Score
-    void Update()
+    /// <summary>
+    /// keeping check of the current Score
+    /// </summary>
+    private void Update()
     {
         text.text = "Score: " + score;
     }

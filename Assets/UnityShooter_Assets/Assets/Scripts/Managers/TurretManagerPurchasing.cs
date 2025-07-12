@@ -7,32 +7,36 @@ public class TurretManagerPurchasing : MonoBehaviour
     public GameObject turret;
     public GameObject purchase;
     public Transform turretLocation;
-    private ScoreManager scoreManager;
-
     public int takePoints = 150;
 
+    private ScoreManager scoreManager;
 
-    void Awake()
+    private void Awake()
     {
         scoreManager = GetComponent<ScoreManager>(); // To handle removing points from the score
     }
 
-    //When player purchases they must wait for 10 seconds. That is when the turret will also despawn
+    /// <summary>
+    /// When player purchases they must wait for 10 seconds. That is when the turret will also despawn (Function found in TurretDespawn)
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator CoolDown()
     {
         yield return new WaitForSeconds(10);
         turretInLevel = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         TurretText();
         PurchasingTurret();
     }
 
-    //When player reaches 150 score-points, Text on top right will appear
-    void TurretText()
+    /// <summary>
+    /// When player reaches 150 score-points, Text on top right will appear
+    /// </summary>
+    private void TurretText()
     {
         if(ScoreManager.score >= 150)
         {
@@ -44,7 +48,9 @@ public class TurretManagerPurchasing : MonoBehaviour
         }
     }
 
-    //When player presses spacebar, a Turret will appear in the middle of the level
+    /// <summary>
+    /// When player presses spacebar, a Turret will appear in the middle of the level
+    /// </summary>
     public void PurchasingTurret()
     {
         if(Input.GetButtonDown("PurchaseTurret") && turretInLevel == false)

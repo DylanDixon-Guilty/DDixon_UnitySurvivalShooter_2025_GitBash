@@ -9,14 +9,16 @@ public class TrapManager : MonoBehaviour
     public float trapSpawnTimer = 10f;
     public Transform[] trapSpawnPoint;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    
+    private void Start()
     {
         InvokeRepeating(nameof(TrapSpawning), trapSpawnTimer, trapSpawnTimer);
     }
 
-    //Every 10 seconds a trap will spawn at 1 of the trap spawn locations.
-    void TrapSpawning()
+    /// <summary>
+    /// Every 10 seconds a trap will spawn at 1 of the trap spawn locations (Game-object).
+    /// </summary>
+    private void TrapSpawning()
     {
        if (playerHealth.currentHealth <= 0)
        {
