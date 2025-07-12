@@ -9,7 +9,7 @@ public class EnemyLootDrop : MonoBehaviour
 
     public GameObject medKit;
     public Transform enemyDeathPoint;
-    public int dropChance; // 50 in Enemy Prefabs
+    public int dropChance; // 50 in Enemy Prefab
 
     private void Awake()
     {
