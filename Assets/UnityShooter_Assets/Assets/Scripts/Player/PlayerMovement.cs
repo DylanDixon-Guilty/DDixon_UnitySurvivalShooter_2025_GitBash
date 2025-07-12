@@ -4,12 +4,11 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 6f;
     
-    Vector3 movement;
-    Animator anim;
-    
-    Rigidbody playerRigidbody;
-    int floorMask;
-    float camRayLength = 100f;
+    private Vector3 movement;
+    private Animator anim;
+    private Rigidbody playerRigidbody;
+    private int floorMask;
+    private float camRayLength = 100f;
 
     private void Awake()
     {
@@ -28,14 +27,20 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    void Move(float h, float v)
+    /// <summary>
+    /// To move around the player upon hitting the W-A-S-D keys
+    /// </summary>
+    private void Move(float h, float v)
     {
         movement.Set(h, 0f, v);
         movement = movement.normalized * speed * Time.deltaTime;
         playerRigidbody.MovePosition(transform.position + movement);
     }
 
-    void Turning()
+    /// <summary>
+    /// For when the player moves the mouse around the play screen
+    /// </summary>
+    private void Turning()
     {
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         
@@ -51,11 +56,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Animating(float h, float v)
+    /// <summary>
+    /// Function to play to walking animation
+    /// </summary>
+    private void Animating(float h, float v)
     {
         bool walking = h != 0f || v != 0f;
         anim.SetBool("IsWalking", walking);
     }
-
-    
 }

@@ -6,26 +6,26 @@ public class PlayerHealth : MonoBehaviour
 {
     public int startingHealth = 100;
     public int currentHealth;
+    public float flashSpeed = 5f;
     public Slider healthSlider;
     public Image damageImage;
     public Image healImage;
     public AudioClip deathClip;
-    public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, .1f);
     public Color healColor = new Color(0f, 1f, 0f, .1f);
 
-    Animator anim;
-    AudioSource playerAudio;
-    PlayerMovement playerMovement;
-    PlayerShooting playerShooting;
-    bool isDead;
-    bool damaged;
+    private Animator anim;
+    private AudioSource playerAudio;
+    private PlayerMovement playerMovement;
+    private PlayerShooting playerShooting;
+    private bool isDead;
+    private bool damaged;
 
     //For MedKit Script//
     public bool isHealed;
 
     //For Getting Shot//
-    ParticleSystem hitParticles;
+    private ParticleSystem hitParticles;
 
     private void Awake()
     {
@@ -38,10 +38,10 @@ public class PlayerHealth : MonoBehaviour
         hitParticles = GetComponentInChildren<ParticleSystem>();
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
-        if (damaged)
+        if (damaged)//When getting damaged
         {
             damageImage.color = flashColour;
         }
@@ -51,7 +51,7 @@ public class PlayerHealth : MonoBehaviour
         }
         damaged = false;
 
-        if(isHealed)
+        if(isHealed)//When picking up Medkit
         {
             healImage.color = healColor;
         }
@@ -89,6 +89,9 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function to call upon player dying
+    /// </summary>
     private void Death()
     {
         isDead = true;
@@ -100,11 +103,18 @@ public class PlayerHealth : MonoBehaviour
         playerShooting.enabled = false;
     }
 
+    /// <summary>
+    /// A Debug to let me know that the game restarted
+    /// </summary>
     public void RestartLevel()
     {
         Debug.Log("Restart Level");
     }
 
+    /// <summary>
+    /// Function called upon when player walks into a Medkit
+    /// </summary>
+    /// <param name="amount"></param>
     public void HealthRestored(int amount)
     {
         isHealed = true;
