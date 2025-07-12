@@ -5,19 +5,63 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Turrent : MonoBehaviour
 {
+    //The part of the turret that rotates//
+    public Transform turretHead;
 
-    public Transform turretHead; // The part of the turret that rotates
     private Transform target;
-    //When than more than target
     private GameObject[] enemiesInRange;
     private Transform currentTarget;
 
+    //For Shooting the enemy//
+    public int damagePerShot = 20;
+    public float timeBetweenBullets = 0.4f;
+    public float range = 100f;
 
-    //When there is more than one target, it will target the one that newly entered the radius//
-    void UpdateCurrentTarget()
+    private Ray shootRay;
+    private RaycastHit shootHit;
+    private float timer;
+    private int shootableMask;
+    private float effectDisplayTime = 0.2f;
+    private ParticleSystem gunParticles;
+    private LineRenderer gunLine;
+    private AudioSource gunAudio;
+    private Light gunLight;
+
+    void Awake()
+    {
+        shootableMask = LayerMask.GetMask("Shootable");
+        gunParticles = GetComponent<ParticleSystem>();
+        gunLine = GetComponent<LineRenderer>();
+        gunAudio = GetComponent<AudioSource>();
+        gunLight = GetComponent<Light>();
+    }
+
+    void Update()
+    {
+        //For Looking At Enemy//
+        UpdateCurrentTarget();
+        LookingAtTarget();
+
+        //For Attacking//
+        timer += Time.deltaTime;
+
+        if (currentTarget != null && timer >= timeBetweenBullets)
+        {
+            Shoot();
+        }
+        if (timer >= timeBetweenBullets * effectDisplayTime)
+        {
+            DisableEffects();
+        }
+    }
+
+    /// <summary>
+    /// When there is more than one target, it will target the one that newly entered the radius (trigger Sphere collider)
+    /// </summary>
+    private void UpdateCurrentTarget()
     {
 
-        enemiesInRange = GameObject.FindGameObjectsWithTag ("Enemy");
+        enemiesInRange = GameObject.FindGameObjectsWithTag("Enemy");
         //To stop firing at enemy that is dead//
         if (enemiesInRange.Length == 0)
         {
@@ -40,65 +84,23 @@ public class Turrent : MonoBehaviour
         currentTarget = closest;
     }
 
-
-    //For When the turrent can see Enemy//
+    /// <summary>
+    /// For When the turret can see Enemy
+    /// </summary>
     void LookingAtTarget()
     {
         if (currentTarget != null)
         {
-            // Rotate turret head
+            //Rotate turret head
             Vector3 direction = (currentTarget.position - turretHead.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             turretHead.rotation = Quaternion.Slerp(turretHead.rotation, lookRotation, Time.deltaTime * 5f);
-
         }
     }
 
-    void Update()
-    {
-        //For Looking At Enemy//
-        UpdateCurrentTarget();
-        LookingAtTarget();
-
-        //For Attacking//
-        timer += Time.deltaTime;
-
-        if (currentTarget != null && timer >= timeBetweenBullets)
-        {
-            Shoot();
-        }
-        if (timer >= timeBetweenBullets * effectDisplayTime)
-        {
-            DisableEffects();
-        }
-    }
-
-    //For Shooting the enemy
-    public int damagePerShot = 20;
-    public float timeBetweenBullets = 0.4f;
-    public float range = 100f;
-
-    float timer;
-    Ray shootRay;
-    RaycastHit shootHit;
-    int shootableMask;
-    ParticleSystem gunParticles;
-    LineRenderer gunLine;
-    AudioSource gunAudio;
-    Light gunLight;
-    float effectDisplayTime = 0.2f;
-
-    void Awake()
-    {
-        shootableMask = LayerMask.GetMask("Shootable");
-        gunParticles = GetComponent<ParticleSystem>();
-        gunLine = GetComponent<LineRenderer>();
-        gunAudio = GetComponent<AudioSource>();
-        gunLight = GetComponent<Light>();
-
-    }
-
-    //==Every 0.5 seconds the Turrent will attempt fire at the enemy if they within range==//
+    /// <summary>
+    /// Every 0.5 seconds the Turrent will attempt fire at the enemy if they are within range
+    /// </summary>
     void Shoot()
     {
         timer = 0f;
@@ -127,6 +129,10 @@ public class Turrent : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Function to disable Light and gunline when turret is shooting
+    /// </summary>
     public void DisableEffects()
     {
         gunLine.enabled = false;
