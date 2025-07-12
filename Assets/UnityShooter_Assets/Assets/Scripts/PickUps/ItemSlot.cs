@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
 
-    //==Item Slot==//
+    //==Item Slots==//
     public TextMeshProUGUI onNumber1;
     public TextMeshProUGUI onNumber2;
     public Color numberSelected = Color.green;
@@ -21,7 +21,9 @@ public class ItemSlot : MonoBehaviour
         ItemSelected();
     }
 
-    //When player presses One or Two, the number on the Item list will appear Green. Indicating which weapon the player is using
+    /// <summary>
+    /// When player presses One or Two, the number on the Item list will appear Green. Indicating which weapon the player is using
+    /// </summary>
     public void ItemSelected()
     {
         if(Input.GetButtonDown("ItemOne"))

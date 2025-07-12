@@ -5,22 +5,20 @@ using UnityEngine.UI;
 
 public class PlayerSprinting : MonoBehaviour
 {
-    public int maxStamina = 20;
-    public int currentStamina;
-    private int staminaDamage = 10; //When player holds down Left-shift for at least 0.5 seconds, take away 10-stamina from currentStamina
-
-    private int timer = 1; // Goes to While statement in the FixedUpdate funtion/method.
-    
-    public Slider sprintMeter;
+    //When player holds down Left-shift for at least 0.5 seconds, take away 10-stamina from currentStamina
+    private int staminaDamage = 10;
+    private int timerToReRun = 1; // Goes to While statement in the FixedUpdate funtion/method.
     private PlayerMovement playerMovement;
 
-    public bool outOfStamina; //Currently not in use but may cause bug if removed.
+    public Slider sprintMeter;
     public bool tired; // Completely out of Stamina
+    public int maxStamina = 20;
+    public int currentStamina;
 
 
     public float timeToRun = 0.5f; // How long the Stamina bar takes to deplete per charge (holding down left-shift)
 
-    void Awake()
+    private void Awake()
     {
         currentStamina = maxStamina;
         playerMovement = GetComponent<PlayerMovement>();
@@ -28,35 +26,35 @@ public class PlayerSprinting : MonoBehaviour
     }
 
 
-    void Update()
+    private void Update()
     {
         Sprinting();
     }
 
+    /// <summary>
+    /// This functions handles when the player will regain their stamina after 8 Seconds
+    /// </summary>
     private void FixedUpdate()
     {
         // Countdown of when player Regains Stamina
        if(currentStamina != 20 && tired == true)
         {
-            while (timer > 0)
+            while (timerToReRun > 0)
             {
-                timer--;
+                timerToReRun--;
                 StartCoroutine(nameof(CountdownTimer));
             }
         }
 
         if (currentStamina == 20)
         {
-            outOfStamina = false;
             tired = false;
-        }
-        else if (currentStamina < 20)
-        {
-            outOfStamina = true;
         }
     }
 
-    // pressing Shift lets the player run
+    /// <summary>
+    /// pressing Shift lets the player run
+    /// </summary>
     public void Sprinting()
     {
         if (Input.GetButtonDown("Dash") && tired == false)
@@ -79,29 +77,40 @@ public class PlayerSprinting : MonoBehaviour
 
     }
 
-    //To Regenarate Stamina after 8 seconds//
+    /// <summary>
+    /// To Regenarate Stamina after 8 seconds
+    /// </summary>
     private IEnumerator CountdownTimer()
     {
         yield return new WaitForSeconds(8);
         StaminaRegenarate();
     }
-    void StaminaRegenarate()
+
+    /// <summary>
+    /// To Regenerate all of player's Stamina
+    /// </summary>
+    private void StaminaRegenarate()
     {
         currentStamina = maxStamina;
         sprintMeter.value = currentStamina;
         tired = false;
-        timer = 1; //To reset While statement
+        timerToReRun = 1; //To reset While statement
     }
 
-
+    /// <summary>
+    /// Function to take away Stamina from player while Sprinting
+    /// </summary>
     public void DrainStamina(int amount)
     {
         currentStamina -= amount;
         sprintMeter.value = currentStamina;
         
     }
-    //To make invoke in Sprinting method easier to handle
-    void StaminaDrainer()
+
+    /// <summary>
+    /// To make invoke in Sprinting method easier to handle
+    /// </summary>
+    private void StaminaDrainer()
     {
         DrainStamina(staminaDamage);
     }
