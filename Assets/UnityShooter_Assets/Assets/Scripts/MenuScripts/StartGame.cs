@@ -5,7 +5,9 @@ public class StartGame : MonoBehaviour
 {
     public string sceneToLoad;
 
-    //On Button press, go to Level 01
+    /// <summary>
+    /// On Button press, go to Level 01 (Function added to Button)
+    /// </summary>
     public void GoToLevelOne()
     {
         SceneManager.LoadScene(sceneToLoad);

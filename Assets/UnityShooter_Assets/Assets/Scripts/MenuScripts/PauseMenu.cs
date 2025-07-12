@@ -12,14 +12,16 @@ public class PauseMenu : MonoBehaviour
     //To change to main menu upon confirm
     public string sceneToLoad;
 
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         PauseMenuButton();
     }
 
-    //When player presses the Escape key (Esc) the game pauses
-    void PauseMenuButton()
+    /// <summary>
+    /// When player presses the Escape key (Esc) the game pauses
+    /// </summary>
+    private void PauseMenuButton()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
@@ -30,8 +32,10 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    //Pause the Menu
-    void Pause()
+    /// <summary>
+    /// Function to Pause the Menu
+    /// </summary>
+    private void Pause()
     {
         pauseMenuUI.SetActive(true);
         soundVolume.SetVolume();
@@ -39,42 +43,54 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = true;
     }
 
-    //Resume to game (Unpause game)
-    void Resume()
+    /// <summary>
+    /// Function to Resume the game (Unpause game)
+    /// </summary>
+    private void Resume()
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
     }
 
-    //clicking on Resume button is way to unpause game
+    /// <summary>
+    /// Clicking on Resume button to unpause game (Function added to Button)
+    /// </summary>
     public void PressedResume()
     {
         Resume();
     }
 
-    //Clicked on Options button
+    /// <summary>
+    /// Clicked on Options button (Function added to Button)
+    /// </summary>
     public void PressedOptions()
     {
         pauseMenuUI.SetActive(false);
         optionsMenuUI.SetActive(true);
     }
 
-    //Clicked on Back to Pause Menu button in Options
+    /// <summary>
+    /// Clicked on Back to Pause Menu button in Options (Function added to Button)
+    /// </summary>
     public void PressedBackToPauseMenu()
     {
         optionsMenuUI.SetActive(false);
         pauseMenuUI.SetActive(true);
     }
 
-    //Clicked on Return to Main Menu button. A Comfirm UI will appear first
+    /// <summary>
+    /// Clicked on Return to Main Menu button. A Comfirm UI will appear first (Function added to Button)
+    /// </summary>
     public void PressedReturnToMenu()
     {
         pauseMenuUI.SetActive(false);
         comfirmMenuUI.SetActive(true);
     }
 
-    //Player pressed Yes button in ComfirmMenu
+    /// <summary>
+    /// Player pressed Yes button in ComfirmMenu (Function added to Button)
+    /// </summary>
     public void PressedYes()
     {
         Time.timeScale = 1f;
@@ -83,7 +99,9 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(sceneToLoad);
     }
 
-    //Player pressed No button in ComfirmMenu
+    /// <summary>
+    /// Player pressed No button in ComfirmMenu (Function added to Button)
+    /// </summary>
     public void PressedNo()
     {
         comfirmMenuUI.SetActive(false);
