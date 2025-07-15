@@ -36,7 +36,7 @@ public class MedKit : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         
-        if (other.gameObject == player && playerHealth.currentHealth != 100)
+        if (other.gameObject == player && playerHealth.currentHealth != playerHealth.startingHealth)
         {
             playerHealth.HealthRestored(Heal);
             Destroy(gameObject);
