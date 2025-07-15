@@ -37,7 +37,7 @@ public class PlayerSprinting : MonoBehaviour
     private void FixedUpdate()
     {
         // Countdown of when player Regains Stamina
-       if(currentStamina != 20 && tired == true)
+       if(currentStamina != 20 && tired)
         {
             while (timerToReRun > 0)
             {
@@ -57,7 +57,7 @@ public class PlayerSprinting : MonoBehaviour
     /// </summary>
     public void Sprinting()
     {
-        if (Input.GetButtonDown("Dash") && tired == false)
+        if (Input.GetButtonDown("Dash") && tired)
         {
             
             playerMovement.speed = 12f;
