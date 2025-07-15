@@ -27,7 +27,7 @@ public class Turrent : MonoBehaviour
     private AudioSource gunAudio;
     private Light gunLight;
 
-    void Awake()
+    private void Awake()
     {
         shootableMask = LayerMask.GetMask("Shootable");
         gunParticles = GetComponent<ParticleSystem>();
@@ -36,7 +36,7 @@ public class Turrent : MonoBehaviour
         gunLight = GetComponent<Light>();
     }
 
-    void Update()
+    private void Update()
     {
         //For Looking At Enemy//
         UpdateCurrentTarget();
@@ -87,7 +87,7 @@ public class Turrent : MonoBehaviour
     /// <summary>
     /// For When the turret can see Enemy
     /// </summary>
-    void LookingAtTarget()
+    private void LookingAtTarget()
     {
         if (currentTarget != null)
         {
@@ -101,7 +101,7 @@ public class Turrent : MonoBehaviour
     /// <summary>
     /// Every 0.5 seconds the Turrent will attempt fire at the enemy if they are within range
     /// </summary>
-    void Shoot()
+    private void Shoot()
     {
         timer = 0f;
         gunAudio.Play(); // plays shoot
