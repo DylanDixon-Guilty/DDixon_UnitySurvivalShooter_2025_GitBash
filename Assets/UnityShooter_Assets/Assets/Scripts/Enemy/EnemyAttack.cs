@@ -4,7 +4,7 @@ public class EnemyAttack : MonoBehaviour
 {
     public float timeBetweenAttacks = 0.5f;
     public int attackDamage = 10;
-    public static GameObject player; //Also used in EnemyManager
+    public string playerGameObject = "Player";
 
     private Animator anim;
     private PlayerHealth playerHealth;
@@ -14,7 +14,7 @@ public class EnemyAttack : MonoBehaviour
 
     private void Awake()
     {
-        playerHealth = player.GetComponent<PlayerHealth>();
+        playerHealth = EnemyManager.Player.GetComponent<PlayerHealth>();
         enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent<Animator>();
     }
@@ -24,7 +24,7 @@ public class EnemyAttack : MonoBehaviour
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == player)
+        if (other.gameObject.CompareTag(playerGameObject))
         {
             playerInRange = true;
         }
@@ -35,7 +35,7 @@ public class EnemyAttack : MonoBehaviour
     /// </summary>
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == player) 
+        if (other.gameObject.CompareTag(playerGameObject)) 
         {
             playerInRange = false;
         }

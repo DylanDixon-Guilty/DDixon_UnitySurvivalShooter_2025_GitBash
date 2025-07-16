@@ -3,14 +3,15 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public PlayerHealth playerHealth;
-    public GameObject enemy;
+    public GameObject enemyPrefab;
     public float spawnTime = 3f;
     public Transform[] spawnPoints;
+    public static GameObject Player;
 
 
     private void Start()
     { 
-        EnemyAttack.player = GameObject.FindGameObjectWithTag("Player");
+        Player = GameObject.FindGameObjectWithTag("Player");
         EnemyMovement.playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
 
         InvokeRepeating(nameof(Spawn), spawnTime, spawnTime);
@@ -27,6 +28,6 @@ public class EnemyManager : MonoBehaviour
         }
 
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
-        Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        GameObject enemyInstance = Instantiate(enemyPrefab, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
     }
 }
