@@ -19,7 +19,7 @@ public class EnemyLootDrop : MonoBehaviour
 
     private void Update()
     {
-        if(enemyHealth.currentHealth <= 0 && stopLooting == true)
+        if(enemyHealth.currentHealth <= 0 && stopLooting)
         {
             HealthKitLootOnDeath();
             stopLooting = false;

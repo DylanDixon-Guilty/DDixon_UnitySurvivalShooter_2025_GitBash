@@ -2351,7 +2351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 963564340}
-  enemy: {fileID: 5538344420769296902, guid: be9504a5e68fbd149a8224d59a134935, type: 3}
+  enemyPrefab: {fileID: 5538344420769296902, guid: be9504a5e68fbd149a8224d59a134935, type: 3}
   spawnTime: 3
   spawnPoints:
   - {fileID: 138790823}
@@ -2368,7 +2368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 963564340}
-  enemy: {fileID: 1819768538276330, guid: ebed7a3ef4be5458fb88a3c3a689c566, type: 3}
+  enemyPrefab: {fileID: 1819768538276330, guid: ebed7a3ef4be5458fb88a3c3a689c566, type: 3}
   spawnTime: 13
   spawnPoints:
   - {fileID: 869734309}
@@ -2385,7 +2385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 963564340}
-  enemy: {fileID: 1161934229116340, guid: 78e1368557eab4d62a5487e98c1b5c5f, type: 3}
+  enemyPrefab: {fileID: 1161934229116340, guid: 78e1368557eab4d62a5487e98c1b5c5f, type: 3}
   spawnTime: 5
   spawnPoints:
   - {fileID: 1821095267}
@@ -2402,7 +2402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 963564340}
-  enemy: {fileID: 1459029006898376990, guid: 43fabbfc1d2e0c54ca30a84d17edfc46, type: 3}
+  enemyPrefab: {fileID: 1459029006898376990, guid: 43fabbfc1d2e0c54ca30a84d17edfc46, type: 3}
   spawnTime: 31
   spawnPoints:
   - {fileID: 471362393}

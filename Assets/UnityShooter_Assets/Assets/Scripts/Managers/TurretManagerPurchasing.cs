@@ -53,7 +53,7 @@ public class TurretManagerPurchasing : MonoBehaviour
     /// </summary>
     public void PurchasingTurret()
     {
-        if(Input.GetButtonDown("PurchaseTurret") && turretInLevel == false)
+        if(Input.GetButtonDown("PurchaseTurret") && turretInLevel)
         {
             ScoreManager.score -= takePoints;
             turretInLevel = true;
