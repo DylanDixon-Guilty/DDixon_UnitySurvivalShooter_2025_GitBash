@@ -11,9 +11,11 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     { 
-        Player = GameObject.FindGameObjectWithTag("Player");
-        EnemyMovement.playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
-
+        if(Player == null)
+        {
+            Player = GameObject.FindGameObjectWithTag("Player");
+        }
+        
         InvokeRepeating(nameof(Spawn), spawnTime, spawnTime);
     }
 
