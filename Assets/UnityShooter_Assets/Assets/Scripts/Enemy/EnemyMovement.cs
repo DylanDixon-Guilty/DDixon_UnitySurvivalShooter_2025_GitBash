@@ -6,12 +6,14 @@ public class EnemyMovement : MonoBehaviour
     private PlayerHealth playerHealth;
     private EnemyHealth enemyHealth;
     private NavMeshAgent nav;
+    private Transform playerTransform;
 
-    public static Transform playerPosition; //Also used in EnemyManager
+    
 
     private void Awake()
     {
-        playerHealth = playerPosition.GetComponent<PlayerHealth>();
+        playerTransform = EnemyManager.Player.transform;
+        playerHealth = playerTransform.GetComponent<PlayerHealth>();
         enemyHealth = GetComponent<EnemyHealth>();
         nav = GetComponent<NavMeshAgent>();
     }
@@ -24,7 +26,7 @@ public class EnemyMovement : MonoBehaviour
         
         if(enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
         {
-            nav.SetDestination(playerPosition.position);
+            nav.SetDestination(playerTransform.position);
         }
         else
         {
